@@ -1,0 +1,57 @@
+
+#spanProgContainer {
+    padding-top: 15px;
+    float: right;
+}
+
+#container {
+
+    margin: 9% auto;
+    text-align: center;
+    width: 80%;
+
+}
+
+#workSection {
+    margin-top: 2%;
+    float: left;
+    width: 82%;
+}
+
+#control {
+    float: left;
+    width: auto;
+}
+
+#ru_ver {
+    font-size: x-large;
+    color: chocolate;
+}
+
+#eng_ver {
+    font-size: x-large;
+    color: darkgreen;
+}
+
+#user_ver {
+    font-size: x-large;
+    text-align: center;
+    width: 90%;
+}
+
+#progressBar {
+    border: 1px solid #6789b3;
+    color: #6789b3;
+    width: 350px;
+
+}
+
+#current_test {
+    font-size: x-large;
+    color: #6789b3;
+}
+
+progress::-moz-progress-bar { background: #6789b3; }
+
+progress::-webkit-progress-bar { background: #fff; }
+progress::-webkit-progress-value { background: #6789b3; }

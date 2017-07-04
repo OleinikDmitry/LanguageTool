@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>My set page</title>
+    <script src="../resources/js/jquery.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/bootstrap-dialog.min.js"></script>
+    <script src="../resources/js/kendo.all.min.js"></script>
+    <script src="../resources/js/user_set.js"></script>
+
+
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../resources/css/bootstrap-dialog.min.css"/>
+    <link rel="stylesheet" href="../resources/css/kendo.common.min.css"/>
+    <link rel="stylesheet" href="../resources/css/kendo.default.min.css"/>
+    <link rel="stylesheet" href="../resources/css/common.css"/>
+
+    <style>
+        div.k-multiselect-wrap .k-button {
+            width: 100%;
+        }
+        body {
+            height: 2000px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <br/>
+    <div id="menu">
+        <button id="save" onclick="save()" class="btn-menu right-align">
+            <img src="../../resources/images/save.png" title="Save"/>
+        </button>
+
+        <button class="btn-menu" onclick="location.href='/'">
+            <img src="../../resources/images/home.png" title="Home page"/>
+        </button>
+    </div>
+
+    <br/>
+
+
+    <div id="ms_holder">
+        <select id="ms"></select>
+    </div>
+
+
+</body>
+</html>

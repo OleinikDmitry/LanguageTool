@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home page</title>
+
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../resources/css/common.css"/>
+    <link rel="stylesheet" href="../resources/css/bootstrap-dialog.min.css"/>
+    <script src="../resources/js/jquery-3.2.1.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/bootstrap-dialog.min.js"></script>
+    <script src="../resources/js/welcome.js"></script>
+</head>
+
+<body>
+
+    <div sec:authorize="isAuthenticated()">
+
+        <div id="menuHolder">
+            <button class="btn-menu right-align small-margin-left" onclick="location.href='/logout'">
+                <img src="../../resources/images/logout.png" title="Logout"/>
+            </button>
+
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <button class="btn-menu right-align" onclick="location.href='/admin'">
+                    <img src="../../resources/images/admin.png" title="Admin page"/>
+                </button>
+            </div>
+
+            <button class="btn-menu right-align" onclick="location.href='/myset'">
+                <img src="../../resources/images/edit.png" title="Edit my set"/>
+                <!--Edit my set-->
+            </button>
+
+
+        </div>
+
+
+        <h2 class="small-margin-left">
+            Welcome
+            <b><span sec:authentication="name"></span></b>
+        </h2>
+
+    </div>
+
+    <div sec:authorize="isAnonymous()">
+
+        <div class="container">
+
+            <h2>
+                Welcome guest
+            </h2>
+            <div>
+                Please log in if you wish to use personal settings
+                <a href="/login">Login</a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!--<br/><br/><br/><br/><br/>-->
+
+    <div style="text-align:center; margin-top: 10%">
+        <button id="showGenTestDialogBtn" class="medium-font" onclick="createGenericTest()">
+            <img src="../../resources/images/generic_test.png" title="Generic test"/>
+            <!--Generic test-->
+        </button>
+
+        <button id="showCustomTestDialogBtn" class="medium-font small-margin-left" onclick="createCustomTest()">
+            <img src="../../resources/images/custom_test.png" title="Custom test"/>
+            <!--Custom test-->
+        </button>
+    </div>
+
+    <br/>
+    <div style="text-align:center;">
+
+    </div>
+
+
+</body>
+</html>

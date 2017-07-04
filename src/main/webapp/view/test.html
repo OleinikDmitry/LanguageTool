@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Generic test</title>
+
+    <script src="../resources/js/jquery.js"></script>
+    <script src="../resources/js/test.js"></script>
+    <link rel="stylesheet" href="../resources/css/test.css"/>
+    <link rel="stylesheet" href="../resources/css/common.css"/>
+
+
+</head>
+<body onload="initView()">
+
+
+<div id="header">
+    <!--<div class="inline">
+        <a href="/">
+            <input type="image" src="../../resources/images/home.png" id="homeBtn"/>
+        </a>
+    </div>-->
+    <button class="btn-menu" onclick="location.href='/'">
+        <img src="../../resources/images/home.png" title="Home page"/>
+    </button>
+    <div id="spanProgContainer" class="inline">
+        <label id="current_test">
+            [ 1 / <span th:text="${size}"></span>]
+        </label>
+        <progress id="progressBar" th:max="${size}" value="1">
+        <span>1</span>
+        </progress>
+
+    </div>
+</div>
+
+<!--<br class="clearBoth"/>
+<br/><br/>-->
+
+<div id="container">
+    <div id="workSection">
+        <label id="ru_ver">
+            <span th:text="${firstUnit.versionRu}"></span>
+        </label>
+        <br/><br/>
+        <input type="text" id="user_ver"/>
+        <br/><br/>
+        <label id="eng_ver">
+            <span th:text="${firstUnit.versionEn}"></span>
+        </label>
+
+    </div>
+
+    <div id="control">
+        <input type="image" src="../../resources/images/vision.png" onclick="showEng(true)" id="visionBtn"/>
+        <br/><br/>
+        <input type="image" src="../../resources/images/next.png" th:onclick=" ' goNext(\'' + ${size} + '\') ' " id="nextBtn" />
+    </div>
+
+</div>
+
+
+</body>
+</html>
