@@ -1,7 +1,10 @@
 package com.oleinik.controller;
 
+import com.oleinik.cache.IndexedIdCacheImpl;
 import com.oleinik.entity.LangUnit;
 import com.oleinik.service.TestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TestController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+
 
     @Autowired
     private TestService testService;
@@ -26,6 +32,7 @@ public class TestController {
             case "twenty":
                 return 20;
             default:
+                logger.error("Invalid test size: " + size);
                 throw new IllegalArgumentException("Invalid test size: " + size);
         }
     }

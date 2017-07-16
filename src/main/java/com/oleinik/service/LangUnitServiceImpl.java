@@ -3,6 +3,7 @@ package com.oleinik.service;
 
 import com.oleinik.entity.LangUnit;
 import com.oleinik.entity.User;
+import com.oleinik.exception.InvalidFormatException;
 import com.oleinik.repository.LangUnitRepository;
 import com.oleinik.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,17 @@ public class LangUnitServiceImpl implements LangUnitService {
         for (String line: lines) {
             if (line == null || line.trim().isEmpty()) continue;
 
+            checkLineFormat(line);
+
             String[] versions = line.split("=");
             langUnits.add(new LangUnit(versions[0].trim(), versions[1].trim()));
         }
         return langUnits;
+    }
+
+    private void checkLineFormat(String line) {
+        if (line.split("=").length != 2 || StringUtils.countMatches(line, '=') != 1)
+            throw new InvalidFormatException("Your text has the invalid format!");
     }
 
     @Override

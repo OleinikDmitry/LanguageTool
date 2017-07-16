@@ -4,10 +4,14 @@ package com.oleinik.controller;
 import com.oleinik.cache.IndexedIdCache;
 import com.oleinik.entity.LangUnit;
 import com.oleinik.entity.User;
+import com.oleinik.exception.InvalidFormatException;
 import com.oleinik.service.LangUnitService;
+import com.oleinik.service.RandomTestService;
 import com.oleinik.service.UserService;
 import com.oleinik.util.JsonStatus;
 import com.oleinik.util.KendoData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +26,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class LangUnitController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LangUnitController.class);
+
 
     @Autowired
     private LangUnitService langUnitService;
@@ -63,7 +70,8 @@ public class LangUnitController {
         List<LangUnit> langUnits;
         try {
             langUnits = langUnitService.parse(batchStr);
-        } catch (Exception e) {
+        } catch (InvalidFormatException e) {
+            logger.error(e.getMessage());
             return new JsonStatus(JsonStatus.ERROR, e.getMessage());
         }
 

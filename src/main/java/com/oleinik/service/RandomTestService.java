@@ -1,10 +1,13 @@
 package com.oleinik.service;
 
 import com.oleinik.cache.IndexedIdCache;
+import com.oleinik.cache.IndexedIdCacheImpl;
 import com.oleinik.entity.LangUnit;
 import com.oleinik.entity.User;
 import com.oleinik.exception.TestNotGeneratedException;
 import com.oleinik.repository.LangUnitRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class RandomTestService implements TestService {
 
+    private static final Logger logger = LoggerFactory.getLogger(RandomTestService.class);
+
+
     @Autowired
     private IndexedIdCache indexedIdCache;
 
@@ -38,7 +44,10 @@ public class RandomTestService implements TestService {
 
     @Override
     public LangUnit getUnitFromTest(int index) {
-        if (langUnitsTest == null) throw new TestNotGeneratedException("Test has not been generated");
+        if (langUnitsTest == null) {
+            logger.error("Test has not been generated");
+            throw new TestNotGeneratedException("Test has not been generated");
+        }
         return langUnitsTest.get(index);
     }
 

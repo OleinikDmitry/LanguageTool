@@ -2,16 +2,23 @@ package com.oleinik.cache;
 
 import com.oleinik.exception.IndexesNotInitException;
 import com.oleinik.repository.LangUnitRepository;
+import com.oleinik.service.SecurityServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class IndexedIdCacheImpl implements IndexedIdCache{
+
+    private static final Logger logger = LoggerFactory.getLogger(IndexedIdCacheImpl.class);
 
     @Autowired
     private LangUnitRepository langUnitRepository;
@@ -21,9 +28,7 @@ public class IndexedIdCacheImpl implements IndexedIdCache{
 
     @Override
     public void sync() {
-        /*TypedQuery<Long> query = em.createQuery("SELECT u.id FROM LangUnit u", Long.class);
-        indices = query.getResultList();*/
-        indices = langUnitRepository.findAllIds();
+        indices = Collections.synchronizedList(langUnitRepository.findAllIds());
         hasInit = true;
     }
 
@@ -59,6 +64,9 @@ public class IndexedIdCacheImpl implements IndexedIdCache{
     }
 
     private void checkInit() {
-        if (! hasInit) throw new IndexesNotInitException("Indices has not been initialized!");
+        if (! hasInit) {
+            logger.error("Indices has not been initialized!");
+            throw new IndexesNotInitException("Indices has not been initialized!");
+        }
     }
 }
